@@ -48,31 +48,27 @@
     .muted { color: var(--muted); }
 
     /* Scrollable table boxes */
-    #results-table-wrapper,
-    #results2-table-wrapper {
+    .table-scroll {
       overflow-x: auto;
       overflow-y: auto;
       max-height: 65vh;
       border-radius: 12px;
     }
 
-    /* Styles applied to SheetJS-generated tables */
-    #results-table table,
-    #results2-table table {
-      width: max-content;           /* prevents squishing; enables horizontal scroll */
+    /* SheetJS table styling */
+    .table-scroll table {
+      width: max-content !important;
       border-collapse: collapse;
       background: #ffffff;
     }
 
-    #results-table th, #results-table td,
-    #results2-table th, #results2-table td {
+    .table-scroll th, .table-scroll td {
       padding: .5rem .75rem;
       border: 1px solid #e5e7eb;
       white-space: nowrap;
     }
 
-    #results-table thead th,
-    #results2-table thead th {
+    .table-scroll thead th {
       position: sticky;
       top: 0;
       background: #f9fafb;
@@ -80,9 +76,8 @@
     }
 
     @media (max-width: 576px) {
-      #results-table table, #results2-table table { font-size: 0.85rem; }
-      #results-table th, #results-table td,
-      #results2-table th, #results2-table td { padding: .4rem .5rem; }
+      .table-scroll table { font-size: 0.85rem; }
+      .table-scroll th, .table-scroll td { padding: .4rem .5rem; }
     }
   </style>
 </head>
@@ -119,7 +114,7 @@
     <!-- Results Table 1 -->
     <section id="results" class="glass p-4 p-md-5 mb-4">
       <h3 class="h5 mb-3">Results Table (Table 1)</h3>
-      <div id="results-table-wrapper">
+      <div id="results-table-wrapper" class="table-scroll">
         <div id="results-table" aria-live="polite">Loading Table 1...</div>
       </div>
       <small class="muted d-block mt-2">Tip: Swipe/scroll inside this box to view the full table.</small>
@@ -128,7 +123,7 @@
     <!-- Results Table 2 -->
     <section id="results2" class="glass p-4 p-md-5 mb-4">
       <h3 class="h5 mb-3">Additional Results Table (Table 2)</h3>
-      <div id="results2-table-wrapper">
+      <div id="results2-table-wrapper" class="table-scroll">
         <div id="results2-table" aria-live="polite">Loading Table 2...</div>
       </div>
       <small class="muted d-block mt-2">Tip: Swipe/scroll inside this box to view the full table.</small>
@@ -167,11 +162,6 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen></iframe>
       </div>
-      <!-- If you prefer a self-hosted MP4, comment the iframe above and uncomment below
-      <video controls class="w-100 mt-2" poster="figures/video-poster.jpg">
-        <source src="video/presentation.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video> -->
     </section>
 
   </main>
@@ -180,7 +170,7 @@
   <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
   <script>
-    // Load Table 1 (data/Table1.xlsx)
+    // Load Table 1
     async function loadXLSX() {
       try {
         const res = await fetch('data/Table1.xlsx');
@@ -188,7 +178,6 @@
         const blob = await res.blob();
         const arrayBuffer = await blob.arrayBuffer();
         const workbook = XLSX.read(arrayBuffer, { type: 'array' });
-
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
         const htmlTable = XLSX.utils.sheet_to_html(worksheet);
@@ -199,7 +188,7 @@
       }
     }
 
-    // Load Table 2 (data/Table2.xlsx)
+    // Load Table 2
     async function loadXLSX2() {
       try {
         const res = await fetch('data/Table2.xlsx');
@@ -207,7 +196,6 @@
         const blob = await res.blob();
         const arrayBuffer = await blob.arrayBuffer();
         const workbook = XLSX.read(arrayBuffer, { type: 'array' });
-
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
         const htmlTable = XLSX.utils.sheet_to_html(worksheet);
