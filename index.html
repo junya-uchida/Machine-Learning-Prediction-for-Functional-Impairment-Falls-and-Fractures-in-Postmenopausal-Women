@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Simulation Study – 3F Machine Learning Prediction</title>
-  <meta name="description" content="A concise research microsite with abstract, table, figures, and video presentation." />
+  <meta name="description" content="Research microsite with abstract, two Excel tables, figures, and a short video." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -27,15 +27,16 @@
     }
 
     .glass {
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border: 1px solid rgba(0,0,0,.05);
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
       border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,.1);
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
     }
 
     .brand-gradient {
-      background: radial-gradient(1200px 400px at 20% -10%, rgba(96,165,250,.25), transparent 40%),
-                  radial-gradient(1000px 500px at 100% 20%, rgba(167,139,250,.15), transparent 35%);
+      background:
+        radial-gradient(1200px 400px at 20% -10%, rgba(96,165,250,.18), transparent 40%),
+        radial-gradient(1000px 500px at 100% 20%, rgba(167,139,250,.12), transparent 35%);
     }
 
     .figure-card img {
@@ -46,28 +47,32 @@
 
     .muted { color: var(--muted); }
 
-    /* Scrollable table box */
-    #results-table-wrapper {
+    /* Scrollable table boxes */
+    #results-table-wrapper,
+    #results2-table-wrapper {
       overflow-x: auto;
       overflow-y: auto;
       max-height: 65vh;
       border-radius: 12px;
     }
 
-    #results-table table {
-      width: max-content;
+    /* Styles applied to SheetJS-generated tables */
+    #results-table table,
+    #results2-table table {
+      width: max-content;           /* prevents squishing; enables horizontal scroll */
       border-collapse: collapse;
       background: #ffffff;
     }
 
-    #results-table th,
-    #results-table td {
+    #results-table th, #results-table td,
+    #results2-table th, #results2-table td {
       padding: .5rem .75rem;
       border: 1px solid #e5e7eb;
       white-space: nowrap;
     }
 
-    #results-table thead th {
+    #results-table thead th,
+    #results2-table thead th {
       position: sticky;
       top: 0;
       background: #f9fafb;
@@ -75,15 +80,19 @@
     }
 
     @media (max-width: 576px) {
-      #results-table table { font-size: 0.85rem; }
-      #results-table th, #results-table td { padding: .4rem .5rem; }
+      #results-table table, #results2-table table { font-size: 0.85rem; }
+      #results-table th, #results-table td,
+      #results2-table th, #results2-table td { padding: .4rem .5rem; }
     }
   </style>
 </head>
 
 <body class="brand-gradient">
   <header class="container py-5">
-    <h1 class="fw-bold display-5">Simulation Study to Assess the Feasibility of Machine Learning-Based Clinically Relevant Risk Prediction Models for Functional Impairment, Falls, and Fractures (the 3 'Fs')</h1>
+    <h1 class="fw-bold display-5">
+      Simulation Study to Assess the Feasibility of Machine Learning-Based Clinically Relevant Risk Prediction Models
+      for Functional Impairment, Falls, and Fractures (the 3 'Fs')
+    </h1>
     <p class="lead muted">
       Junya Uchida, MPH Candidate<br>
       Dalla Lana School of Public Health, University of Toronto<br>
@@ -96,25 +105,34 @@
     <!-- Abstract -->
     <section class="glass p-4 p-md-5 mb-4">
       <h2 class="h4 mb-3">Abstract</h2>
-      <p>Machine learning-based prediction models have gained support for their robustness and flexibility, particularly with complex data common in geriatrics research. They may be well-suited to studying complex aging questions, such as predicting functional status among postmenopausal women. The objective of this study is to develop an interactive prediction model for prevalent, clinically relevant, geriatric health outcomes: functional impairment, falls, and fractures. We simulated a dataset (n = 20,000) to emulate baseline characteristics of the Women’s Health Initiative (WHI) study population, a large study of postmenopausal women. The simulated dataset had a mean age of 63.2 years (SD: 7.25), 82.4% non-Hispanic White. Maximum follow-up was 25 years. We examined random survival forest, XGBoost, and Lasso-Cox models. Models were trained and compared across multiple domain-specific feature sets comprising demographic, socioeconomic, behavioral, functional, and health-related features, selected from existing evidence, with time-dependent ROC-AUC, calibration, and Brier score. SHapley Additive exPlanations (SHAP) guided feature selection. The random survival forest outperformed other models in predicting functional impairment, falls, and fractures. Reduced models incorporating 30 features demonstrated comparable performance relative to the comprehensive models with 57 features, while improving computational efficiency. These reduced models demonstrated strong discrimination (ROC-AUCs >0.80) and predictive accuracy (Brier scores <0.10) across most time points and were subsequently deployed in the interactive application. This study demonstrates the utility of machine learning-based prediction to guide targeted interventions by capturing the complex, heterogeneous nature of geriatric health outcomes. Deploying such advanced models into a user-friendly application may support data-driven decision-making in geriatric clinical practice.</p>
+      <p>
+        Machine learning-based prediction models have gained support for their robustness and flexibility, particularly with complex data common in geriatrics research.
+        They may be well-suited to studying complex aging questions, such as predicting functional status among postmenopausal women.
+        The objective of this study is to develop an interactive prediction model for prevalent, clinically relevant, geriatric health outcomes: functional impairment, falls, and fractures.
+        We simulated a dataset (n = 20,000) to emulate baseline characteristics of the Women’s Health Initiative (WHI) study population.
+        We examined random survival forest, XGBoost, and Lasso-Cox models across domain-specific feature sets with time-dependent ROC-AUC, calibration, and Brier score.
+        SHAP guided feature selection. Reduced models (30 features) retained performance comparable to comprehensive models (57 features), improving computational efficiency
+        (ROC-AUCs > 0.80; Brier < 0.10 across most time points) and were deployed in an interactive application to support data-driven clinical decision-making.
+      </p>
     </section>
 
-    <!-- Results Table -->
+    <!-- Results Table 1 -->
     <section id="results" class="glass p-4 p-md-5 mb-4">
-      <h3 class="h5 mb-3">Results Table</h3>
+      <h3 class="h5 mb-3">Results Table (Table 1)</h3>
       <div id="results-table-wrapper">
-        <div id="results-table">Loading table...</div>
+        <div id="results-table" aria-live="polite">Loading Table 1...</div>
       </div>
       <small class="muted d-block mt-2">Tip: Swipe/scroll inside this box to view the full table.</small>
     </section>
 
     <!-- Results Table 2 -->
-<section id="results2" class="glass p-4 p-md-5 mb-4">
-  <h3 class="h5 mb-3">Additional Results Table (Table 2)</h3>
-  <div id="results2-table-wrapper">
-    <div id="results2-table">Loading Table 2...</div>
-  </div>
-</section>
+    <section id="results2" class="glass p-4 p-md-5 mb-4">
+      <h3 class="h5 mb-3">Additional Results Table (Table 2)</h3>
+      <div id="results2-table-wrapper">
+        <div id="results2-table" aria-live="polite">Loading Table 2...</div>
+      </div>
+      <small class="muted d-block mt-2">Tip: Swipe/scroll inside this box to view the full table.</small>
+    </section>
 
     <!-- Figures -->
     <section class="mb-4">
@@ -149,6 +167,11 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen></iframe>
       </div>
+      <!-- If you prefer a self-hosted MP4, comment the iframe above and uncomment below
+      <video controls class="w-100 mt-2" poster="figures/video-poster.jpg">
+        <source src="video/presentation.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video> -->
     </section>
 
   </main>
@@ -157,9 +180,11 @@
   <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
   <script>
+    // Load Table 1 (data/Table1.xlsx)
     async function loadXLSX() {
       try {
         const res = await fetch('data/Table1.xlsx');
+        if (!res.ok) throw new Error('Table1.xlsx not found');
         const blob = await res.blob();
         const arrayBuffer = await blob.arrayBuffer();
         const workbook = XLSX.read(arrayBuffer, { type: 'array' });
@@ -169,31 +194,32 @@
         const htmlTable = XLSX.utils.sheet_to_html(worksheet);
         document.querySelector('#results-table').innerHTML = htmlTable;
       } catch (err) {
-        console.error("Error loading Excel file:", err);
+        console.error("Error loading Table 1:", err);
+        document.querySelector('#results-table').textContent = 'Unable to load Table 1.';
       }
     }
-    loadXLSX();
 
-      // Load Table2.xlsx
-  async function loadXLSX2() {
-    try {
-      const res = await fetch('data/Table2.xlsx');
-      const blob = await res.blob();
-      const arrayBuffer = await blob.arrayBuffer();
-      const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+    // Load Table 2 (data/Table2.xlsx)
+    async function loadXLSX2() {
+      try {
+        const res = await fetch('data/Table2.xlsx');
+        if (!res.ok) throw new Error('Table2.xlsx not found');
+        const blob = await res.blob();
+        const arrayBuffer = await blob.arrayBuffer();
+        const workbook = XLSX.read(arrayBuffer, { type: 'array' });
 
-      const sheetName = workbook.SheetNames[0];
-      const worksheet = workbook.Sheets[sheetName];
-      const htmlTable = XLSX.utils.sheet_to_html(worksheet);
-      document.querySelector('#results2-table').innerHTML = htmlTable;
-    } catch (err) {
-      console.error("Error loading Excel file:", err);
+        const sheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[sheetName];
+        const htmlTable = XLSX.utils.sheet_to_html(worksheet);
+        document.querySelector('#results2-table').innerHTML = htmlTable;
+      } catch (err) {
+        console.error("Error loading Table 2:", err);
+        document.querySelector('#results2-table').textContent = 'Unable to load Table 2.';
+      }
     }
-  }
 
-  loadXLSX2();
+    loadXLSX();
+    loadXLSX2();
   </script>
 </body>
 </html>
-
-
