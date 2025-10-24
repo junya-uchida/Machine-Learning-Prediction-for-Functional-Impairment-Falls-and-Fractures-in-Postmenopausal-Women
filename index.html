@@ -108,6 +108,14 @@
       <small class="muted d-block mt-2">Tip: Swipe/scroll inside this box to view the full table.</small>
     </section>
 
+    <!-- Results Table 2 -->
+<section id="results2" class="glass p-4 p-md-5 mb-4">
+  <h3 class="h5 mb-3">Additional Results Table (Table 2)</h3>
+  <div id="results2-table-wrapper">
+    <div id="results2-table">Loading Table 2...</div>
+  </div>
+</section>
+
     <!-- Figures -->
     <section class="mb-4">
       <h3 class="h5 mb-3">Figures</h3>
@@ -165,7 +173,27 @@
       }
     }
     loadXLSX();
+
+      // Load Table2.xlsx
+  async function loadXLSX2() {
+    try {
+      const res = await fetch('data/Table2.xlsx');
+      const blob = await res.blob();
+      const arrayBuffer = await blob.arrayBuffer();
+      const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+      const htmlTable = XLSX.utils.sheet_to_html(worksheet);
+      document.querySelector('#results2-table').innerHTML = htmlTable;
+    } catch (err) {
+      console.error("Error loading Excel file:", err);
+    }
+  }
+
+  loadXLSX2();
   </script>
 </body>
 </html>
+
 
