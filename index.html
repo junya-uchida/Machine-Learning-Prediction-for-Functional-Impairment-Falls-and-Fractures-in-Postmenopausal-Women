@@ -140,23 +140,34 @@
           <div class="glass p-3 figure-card h-100">
             <img src="data/figures/Figure1.png" alt="Figure 1" />
             <div class="h5 mb-3">Figure 1: Time-Dependent ROC Curves of All Models at Year 3, 6, 9, 15, and 23</div>
+            <small class="muted d-block mt-2">Note: CVD, cardiovascular disease.<br>
+        CVD, cardiovascular disease; RSF, Random Survival Forest; XGB, XGBoost; LAS, Lasso Cox<br>
+        Only the ROC curves from the evaluation using the tenth imputed dataset are shown.<br>
+              Inverse probability of censoring weighting (IPCW) was applied to account for right-censoring.
+      </small>
           </div>
         </div>
         <div class="col-sm-6 col-lg-4">
           <div class="glass p-3 figure-card h-100">
             <img src="data/figures/Figure2.png" alt="Figure 2" />
             <div class="h5 mb-3">Figure 2: Time-Dependent Calibration of All Models at Year 3, 6, 9, 15, and 23</div>
+            <small class="muted d-block mt-2">Note: CVD, cardiovascular disease.<br>
+              Ten bins were created based on the distribution of predicted survival probabilities, S(t|X), for each calibration plot.
+      </small>
           </div>
         </div>
         <div class="col-sm-6 col-lg-4">
           <div class="glass p-3 figure-card h-100">
-            <img src="data/figures/Figure3" alt="Figure 3" />
+            <img src="data/figures/Figure3.png" alt="Figure 3" />
             <div class="h5 mb-3">Figure 3: Time-Dependent Brier Scores of All Models Throughout the Entire Follow-Up Years</div>
+            <small class="muted d-block mt-2">Note: CVD, cardiovascular disease.<br>
+              Inverse probability of censoring weighting (IPCW) was applied to account for right-censoring.
+      </small>
           </div>
         </div>
         <div class="col-sm-6 col-lg-4">
           <div class="glass p-3 figure-card h-100">
-            <img src="data/figures/Figure4" alt="Figure 3" />
+            <img src="data/figures/Figure4.png" alt="Figure 4" />
             <div class="h5 mb-3">Figure 4: Global SHAP values of the Random Survival Forest Models for Functional Impairment, Falls, and Fractures Using Full Feature Sets</div>
           </div>
         </div>
@@ -201,6 +212,7 @@
   </script>
 </body>
 </html>
+
 
 
 
